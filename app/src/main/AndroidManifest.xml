@@ -23,6 +23,7 @@
             android:theme="@style/AppTheme"
             tools:replace="android:appComponentFactory"
             android:appComponentFactory="whateverString"
+            android:hardwareAccelerated="true"
             android:allowBackup="false">
 
         <!--OptiSplashScreen-->

@@ -8,6 +8,8 @@
 package com.obs.marveleditor.utils
 
 import android.Manifest
+import android.content.res.Resources
+import android.util.DisplayMetrics
 
 class OptiConstant {
     companion object {
@@ -73,5 +75,6 @@ class OptiConstant {
         const val AVI_FORMAT = ".avi"
 
         const val VIDEO_LIMIT = 4 //4 minutes
+
     }
 }

@@ -50,39 +50,73 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/rvVideoOptions"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/exoPlayer">-->
+
+<!--            <ProgressBar-->
+<!--                    android:id="@+id/progressBar"-->
+<!--                    android:visibility="invisible"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:indeterminate="false"-->
+<!--                    android:max="100"-->
+<!--                    android:indeterminateTintMode="src_in"-->
+<!--                    android:progressBackgroundTint="@color/light_blue"-->
+<!--                    android:indeterminateTint="@color/blue"-->
+<!--                    android:layout_marginTop="@dimen/_25sdp"-->
+<!--                    style="?android:attr/progressBarStyleHorizontal"/>-->
+
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/tvVideoProcessing"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:visibility="invisible"-->
+<!--                    android:text="@string/processing_video"-->
+<!--                    android:layout_marginBottom="@dimen/_10sdp"/>-->
+
+<!--        </LinearLayout>-->
+
+        <RelativeLayout
+                android:id="@+id/rl_time_line_video_trimmer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_gravity="center"
                 app:layout_constraintBottom_toTopOf="@+id/rvVideoOptions"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/exoPlayer">
+                app:layout_constraintTop_toBottomOf="@+id/exoPlayer"
+                android:visibility="gone"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                >
 
-            <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:visibility="invisible"
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_time_line_video_trimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:indeterminate="false"
-                    android:max="100"
-                    android:indeterminateTintMode="src_in"
-                    android:progressBackgroundTint="@color/light_blue"
-                    android:indeterminateTint="@color/blue"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    style="?android:attr/progressBarStyleHorizontal"/>
+                    android:layout_centerInParent="true"
+                    />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvVideoProcessing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"
-                    android:text="@string/processing_video"
-                    android:layout_marginBottom="@dimen/_10sdp"/>
+            <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:max="1000"
+                    android:thumb="@drawable/seekbar_line"
+                    android:thumbOffset="@dimen/_16sdp"
+                    android:splitTrack="false"
+                    android:background="@null"
+                    />
 
-        </LinearLayout>
+
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvVideoOptions"

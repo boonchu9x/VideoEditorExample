@@ -8,12 +8,12 @@
 package com.obs.marveleditor
 
 import android.content.Context
+import android.os.CountDownTimer
 import android.util.Log
 import com.obs.marveleditor.interfaces.OptiFFMpegCallback
 import com.obs.marveleditor.utils.OptiConstant
 import com.obs.marveleditor.utils.OptiOutputType
 import com.obs.marveleditor.utils.OptiUtils.task
-import com.obs.marveleditor.videoTrimmer.OptiHgLVideoTrimmer
 import nl.bravobit.ffmpeg.ExecuteBinaryResponseHandler
 import nl.bravobit.ffmpeg.FFmpeg
 import java.io.File
@@ -206,7 +206,7 @@ class OptiVideoEditor private constructor(private val context: Context) {
                 cmd = arrayOf(
                     "-y", "-i", videoFile!!.path, "-vf",
                     "drawtext=fontfile=" + font!!.path + ": text=" + text + ": fontcolor=" + color + ": fontsize=" + size + border + ": " + position,
-                    "-c:v", "libx264", "-c:a", "copy", "-movflags", "+faststart", outputFile.path
+                    "-c:v", "libx264", "-preset", "ultrafast", "-crf", "63", "-c:a", "copy", "-movflags", "+faststart", outputFile.path
                 )
             }
 
@@ -222,6 +222,7 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     position!!,
                     "-codec:a",
                     "copy",
+                    "-preset", "ultrafast",
                     outputFile.path
                 )
             }
@@ -290,6 +291,7 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     endTime,
                     "-c",
                     "copy",
+                    "-preset", "ultrafast",
                     outputFile.path
                 )
             }
@@ -308,6 +310,7 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     "0:v:0",
                     "-map",
                     "1:a:0",
+                    "-preset", "ultrafast",
                     outputFile.path
                 )
             }
@@ -324,6 +327,7 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     endTime,
                     "-c",
                     "copy",
+                    "-preset", "ultrafast",
                     outputFile.path
                 )
             }
@@ -338,6 +342,7 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     "copy",
                     "-vf",
                     "fade=t=in:st=0:d=5",
+                    "-preset", "ultrafast",
                     outputFile.path
                 )
             }
@@ -360,10 +365,22 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     "192k",
                     "-ac",
                     "2",
+                    "-preset", "ultrafast",
                     outputFile.path
                 )
             }
         }
+        var time = 0
+        val countDown = object : CountDownTimer(3000000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                time ++
+                //here you can have your logic to set text to edittext
+            }
+
+            override fun onFinish() {
+                Log.d("CountDown", "onFinish: $time")
+            }
+        }.start()
 
         try {
             task =
@@ -373,11 +390,13 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     }
 
                     override fun onFinish() {
-                        callback!!.onFinish()
+                        countDown.start()
                     }
 
                     override fun onSuccess(message: String?) {
                         callback!!.onSuccess(outputFile, OptiOutputType.TYPE_VIDEO)
+                        countDown.cancel()
+                        Log.d("CountDown", "onSuccess: $time")
                     }
 
                     override fun onProgress(message: String?) {
