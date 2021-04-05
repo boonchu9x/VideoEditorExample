@@ -67,6 +67,9 @@ class OptiVideoOptionsAdapter(videoOptions: ArrayList<String>, val context: Cont
             OptiConstant.TRANSITION -> {
                 p0.ivOption.setImageResource(R.drawable.transition_24)
             }
+            OptiConstant.GIF -> {
+                p0.ivOption.setImageResource(R.drawable.ic_baseline_gif)
+            }
         }
 
         p0.ivOption.setOnClickListener {

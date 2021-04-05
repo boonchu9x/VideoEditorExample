@@ -79,6 +79,27 @@ object OptiUtils {
         return File(dataPath)
     }
 
+    fun copyAssetToInternalStorage(filename : String,resourceName: String, context: Context) : File {
+        val path = Environment.getExternalStorageDirectory()
+            .toString() + File.separator + OptiConstant.APP_NAME + File.separator + OptiConstant.GIF_FILES + File.separator
+        val folder = File(path)
+        if (!folder.exists())
+            folder.mkdirs()
+
+        val dataPath = "$path$resourceName.gif"
+        Log.v("OptiUtils", "path: $dataPath")
+        try {
+            val inputStream = context.assets.open(filename)
+            inputStream.toFile(dataPath)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return File(dataPath)
+    }
+
     private fun InputStream.toFile(path: String) {
         File(path).outputStream().use { this.copyTo(it) }
     }

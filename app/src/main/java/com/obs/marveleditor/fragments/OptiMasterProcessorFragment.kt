@@ -143,7 +143,8 @@ class OptiMasterProcessorFragment : androidx.fragment.app.Fragment(),
         videoOptions.add(OptiConstant.TEXT)
         videoOptions.add(OptiConstant.OBJECT)
         videoOptions.add(OptiConstant.MERGE)
-        //videoOptions.add(OptiConstant.TRANSITION)
+        videoOptions.add(OptiConstant.GIF)
+        videoOptions.add(OptiConstant.TRANSITION)
 
         seekBar?.progress = 0
         seekBar?.isEnabled = true
@@ -463,9 +464,21 @@ class OptiMasterProcessorFragment : androidx.fragment.app.Fragment(),
                 context!!
             )
 
+            OptiUtils.copyFileToInternalStorage(
+                R.drawable.sticker_19,
+                "sticker_19",
+                context!!
+            )
+
             OptiUtils.copyFontToInternalStorage(
                 R.font.roboto_black,
                 "roboto_black",
+                context!!
+            )
+
+            OptiUtils.copyAssetToInternalStorage(
+                "fIe.gif",
+                "file_1",
                 context!!
             )
 
@@ -1132,6 +1145,22 @@ class OptiMasterProcessorFragment : androidx.fragment.app.Fragment(),
                 }.show(fragmentManager, "OptiMergeFragment")
             }
 
+            OptiConstant.GIF -> {
+                masterVideoFile?.let { file ->
+                    val addClipGifFragment = OptiAddGifFragment()
+                    addClipGifFragment.setHelper(this@OptiMasterProcessorFragment)
+                    addClipGifFragment.setFilePathFromSource(file)
+                    showBottomSheetDialogFragment(addClipGifFragment)
+                }
+
+                if (masterVideoFile == null) {
+                    OptiUtils.showGlideToast(
+                        activity!!,
+                        getString(R.string.error_sticker)
+                    )
+                }
+            }
+
             OptiConstant.TRANSITION -> {
                 masterVideoFile?.let { file ->
                     val transitionFragment = OptiTransitionFragment()
@@ -1147,6 +1176,7 @@ class OptiMasterProcessorFragment : androidx.fragment.app.Fragment(),
                     )
                 }
             }
+
         }
     }
 

@@ -77,7 +77,8 @@
                     android:background="@color/black"
                     app:controller_layout_id="@layout/exo_playback_control_view"
                     app:surface_type="surface_view"
-                    app:use_controller="false"/>
+                    app:use_controller="false"
+                    />
 
             <ProgressBar
                     android:visibility="invisible"

@@ -8,6 +8,7 @@
 package com.obs.marveleditor
 
 import android.content.Context
+import android.net.Uri
 import android.os.CountDownTimer
 import android.util.Log
 import com.obs.marveleditor.interfaces.OptiFFMpegCallback
@@ -358,13 +359,31 @@ class OptiVideoEditor private constructor(private val context: Context) {
                     "-crf",
                     "19",
                     "-preset",
-                    "slow",
+                    "ultrafast",
                     "-c:a",
                     "aac",
                     "-b:a",
                     "192k",
                     "-ac",
                     "2",
+                    "-preset", "ultrafast",
+                    outputFile.path
+                )
+            }
+
+
+
+            OptiConstant.VIDEO_GIF_OVERLAY -> {
+                cmd = arrayOf(
+                    "-y",
+                    "-i",
+                    videoFile!!.path,
+                    "-ignore_loop",
+                    "0",
+                    "-i",
+                    imagePath!!,
+                    "-filter_complex",
+                    "overlay=shortest=1",
                     "-preset", "ultrafast",
                     outputFile.path
                 )

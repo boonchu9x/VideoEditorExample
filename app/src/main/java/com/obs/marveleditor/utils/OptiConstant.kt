@@ -26,6 +26,7 @@ class OptiConstant {
         const val MERGE_VIDEO = 8
         const val VIDEO_TRANSITION = 9
         const val CONVERT_AVI_TO_MP4 = 10
+        const val VIDEO_GIF_OVERLAY = 11
 
         const val FLIRT = "filter"
         const val TRIM = "trim"
@@ -35,6 +36,7 @@ class OptiConstant {
         const val OBJECT = "object"
         const val MERGE = "merge"
         const val TRANSITION = "transition"
+        const val GIF = "gif"
 
         const val SPEED_0_25 = "0.25x"
         const val SPEED_0_5 = "0.5x"
@@ -66,6 +68,7 @@ class OptiConstant {
 
         const val CLIP_ARTS = ".ClipArts"
         const val FONT = ".Font"
+        const val GIF_FILES = ".GIFS"
         const val DEFAULT_FONT = "roboto_black.ttf"
         const val MY_VIDEOS = "MyVideos"
 
